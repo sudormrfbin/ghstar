@@ -2,6 +2,7 @@
 
 import os
 import argparse
+import textwrap
 
 import requests
 import requests.exceptions
@@ -27,8 +28,20 @@ class InvalidRepoError(Exception):
         super().__init__(msg)
 
 
+example_text = textwrap.dedent(  # ignore common whitespace for all lines
+    """
+    examples:
+      ghstar microsoft/vscode
+      ghstar jlevy/the-art-of-command-line
+    """
+)
+
 parser = argparse.ArgumentParser(
-    prog="ghstar", description="Star GitHub repos from the command line."
+    prog="ghstar",
+    description="Star GitHub repos from the command line.",
+    epilog=example_text,
+    # specify formatter_class to preserve newlines in epilog
+    formatter_class=argparse.RawDescriptionHelpFormatter,
 )
 parser.add_argument("repo", help="Name of repo to star")
 args = parser.parse_args()
