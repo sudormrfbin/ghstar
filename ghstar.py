@@ -34,7 +34,7 @@ def get_argparser():
     example_text = textwrap.dedent(  # ignore common whitespace for all lines
         """
         examples:
-          ghstar microsoft/vscode
+          ghstar gokulsoumya/ghstar
           ghstar jlevy/the-art-of-command-line
         """
     )
