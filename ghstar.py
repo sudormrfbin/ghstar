@@ -4,9 +4,13 @@ import os
 import sys
 import argparse
 import textwrap
+import collections
 
 import requests
 import requests.exceptions
+
+
+Repo = collections.namedtuple("Repo", ["full_name", "description", "stars"])
 
 
 class AuthError(Exception):
@@ -70,6 +74,37 @@ def get_credentials():
         raise AuthError()
 
     return (gh_user, gh_token)
+
+
+def search_repo(query, gh_user, gh_token):
+    """
+    Search for a repo on GitHub. Searches in the project's description
+    and readme.
+
+    Returns:
+        sequence of Repo: Repositories matching the search query.
+    """
+    try:
+        r = requests.get(
+            url="https://api.github.com/search/repositories",
+            auth=(gh_user, gh_token),
+            params={"q": query},
+        )
+    except requests.exceptions.ConnectionError:
+        raise ConnectionError("Please check your internet connection.")
+
+    result = []
+
+    for repo_item in r.json()["items"]:
+        result.append(
+            Repo(
+                repo_item["full_name"],
+                repo_item["description"],
+                repo_item["stargazers_count"],
+            )
+        )
+
+    return result
 
 
 def star_repo(repo, gh_user, gh_token):
