@@ -166,11 +166,13 @@ def main():
 
     try:
         username, token = get_credentials()
-        star_repo(repo=args.repo, gh_user=username, gh_token=token)
+        search_results = search_repo(query=args.repo, gh_user=username, gh_token=token)
+        repo = select_repo(search_results)
+        star_repo(repo=repo, gh_user=username, gh_token=token)
     except (AuthError, InvalidRepoError, ConnectionError) as error:
         exit(error)
 
-    print("Starred " + args.repo)
+    print("Starred " + repo.full_name)
     exit(0)
 
 
