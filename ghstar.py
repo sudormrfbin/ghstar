@@ -137,6 +137,9 @@ def star_repo(repo, gh_user, gh_token):
     """
     Star a repo on GitHub.
 
+    Args:
+        repo (Repo): Repository to star.
+
     Raises:
         AuthError: Invalid user credentials.
         InvalidRepoError: Invalid repo name.
@@ -144,7 +147,7 @@ def star_repo(repo, gh_user, gh_token):
     """
     try:
         r = requests.put(
-            url="https://api.github.com/user/starred/" + repo,
+            url="https://api.github.com/user/starred/" + repo.full_name,
             auth=(gh_user, gh_token),
             headers={"Content-Length": "0"},
         )
