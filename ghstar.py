@@ -107,6 +107,32 @@ def search_repo(query, gh_user, gh_token):
     return result
 
 
+def select_repo(repos):
+    """
+    Select a repo from a list of repos, preferably returned after a search.
+
+    Args:
+        repos (sequence of Repo): Repositories to choose from.
+
+    Returns:
+        Repo: The user selected repository.
+    """
+    print()
+    for index, repo in enumerate(repos):
+        print(
+            "[{number}] {repo_name} - {desc} ({stars} stars)".format(
+                number=index + 1,
+                repo_name=repo.full_name,
+                desc=repo.description,
+                stars=repo.stars,
+            )
+        )
+    print()
+
+    number = input("Select the repository [1-{}]: ".format(len(repos)))
+    return repos[int(number) - 1]
+
+
 def star_repo(repo, gh_user, gh_token):
     """
     Star a repo on GitHub.
