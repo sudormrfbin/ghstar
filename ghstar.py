@@ -201,6 +201,9 @@ def main():
     ) as error:
         exit(error)
 
+    except KeyboardInterrupt:
+        exit(1)
+
     print("Starred " + repo.full_name)
     exit(0)
 
