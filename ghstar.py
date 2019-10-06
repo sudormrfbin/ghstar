@@ -29,7 +29,7 @@ class InvalidRepoError(Exception):
     """Raised when a given repo is invalid."""
 
     def __init__(self, repo):
-        msg = "{} is not a valid repo.".format(repo)
+        msg = "{} is not a valid repo.".format(repo.full_name)
         super().__init__(msg)
 
 
