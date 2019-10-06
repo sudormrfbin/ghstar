@@ -53,17 +53,17 @@ def get_argparser():
 
     parser = argparse.ArgumentParser(
         prog="ghstar",
-        description="Star GitHub repos from the command line.",
+        description="star GitHub repos from the command line.",
         epilog=example_text,
         # specify formatter_class to preserve newlines in epilog
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("repo", help="Name of repo to star")
+    parser.add_argument("repo", help="name of repo to star")
     parser.add_argument(
         "-i",
         "--interactive",
         action="store_true",
-        help="Search for a repo and star interactively",
+        help="search for a repo and star interactively",
     )
 
     return parser
