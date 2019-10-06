@@ -51,6 +51,12 @@ def get_argparser():
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("repo", help="Name of repo to star")
+    parser.add_argument(
+        "-i",
+        "--interactive",
+        action="store_true",
+        help="Search for a repo and star interactively",
+    )
 
     return parser
 
@@ -166,9 +172,16 @@ def main():
 
     try:
         username, token = get_credentials()
-        search_results = search_repo(query=args.repo, gh_user=username, gh_token=token)
-        repo = select_repo(search_results)
+        if args.interactive:
+            search_results = search_repo(
+                query=args.repo, gh_user=username, gh_token=token
+            )
+            repo = select_repo(search_results)
+        else:
+            repo = Repo(full_name=args.repo, description=None, stars=None)
+
         star_repo(repo=repo, gh_user=username, gh_token=token)
+
     except (AuthError, InvalidRepoError, ConnectionError) as error:
         exit(error)
 
