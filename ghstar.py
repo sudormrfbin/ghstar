@@ -33,6 +33,14 @@ class InvalidRepoError(Exception):
         super().__init__(msg)
 
 
+class NoSearchResultsError(Exception):
+    """Raised when there are no search results in interactive mode"""
+
+    def __init__(self, query):
+        msg = 'No repos found matching "{}"'.format(query)
+        super().__init__(msg)
+
+
 def get_argparser():
     """Returns an `ArgumentParser()` for parsing command line options."""
     example_text = textwrap.dedent(  # ignore common whitespace for all lines
@@ -110,6 +118,9 @@ def search_repo(query, gh_user, gh_token):
             )
         )
 
+    if not result:
+        raise NoSearchResultsError(query)
+
     return result
 
 
@@ -182,7 +193,12 @@ def main():
 
         star_repo(repo=repo, gh_user=username, gh_token=token)
 
-    except (AuthError, InvalidRepoError, ConnectionError) as error:
+    except (
+        AuthError,
+        ConnectionError,
+        InvalidRepoError,
+        NoSearchResultsError,
+    ) as error:
         exit(error)
 
     print("Starred " + repo.full_name)
