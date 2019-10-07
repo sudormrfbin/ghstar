@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "ghstar"
+version = "0.1.0"
+description = "Star GitHub repos from the command line"
+
+authors = ["Gokul <gokulps15@gmail.com>"]
+license = "MIT"
+
+readme = "README.md"
+
+repository = "https://www.github.com/gokulsoumya/ghstar"
+homepage = "https://www.github.com/gokulsoumya/ghstar"
+
+keywords = ["github", "stars"]
+classifiers = [
+        "Topic :: Terminals",
+        "Topic :: Utilities",
+        "Environment :: Console",
+        "Intended Audience :: Developers",
+]
+
+[tool.poetry.dependencies]
+python = "^3.5"
+requests = "^2.22"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+ghstar = 'ghstar.ghstar:main'
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
