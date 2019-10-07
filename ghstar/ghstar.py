@@ -65,6 +65,13 @@ def get_argparser():
         action="store_true",
         help="search for a repo and star interactively",
     )
+    parser.add_argument(
+        "-n",
+        "--search-count",
+        type=int,
+        default=10,
+        help="number of search results to show when run interactively",
+    )
 
     return parser
 
@@ -187,7 +194,7 @@ def main():
             search_results = search_repo(
                 query=args.repo, gh_user=username, gh_token=token
             )
-            repo = select_repo(search_results)
+            repo = select_repo(search_results[: args.search_count])
         else:
             repo = Repo(full_name=args.repo, description=None, stars=None)
 
