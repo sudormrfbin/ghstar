@@ -53,7 +53,7 @@ def get_argparser():
 
     parser = argparse.ArgumentParser(
         prog="ghstar",
-        description="star GitHub repos from the command line.",
+        description="Star GitHub repos from the command line.",
         epilog=example_text,
         # specify formatter_class to preserve newlines in epilog
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -213,4 +213,3 @@ def main():
 
     print("Starred " + repo.full_name)
     exit(0)
-
