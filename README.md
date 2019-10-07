@@ -17,7 +17,7 @@ Starred gokulsoumya/ghstar
 `ghstar` is written in Python3, available on PyPI and installable via pip:
 
 ```
-pip3 install ghstar
+pip install ghstar
 ```
 
 ## Usage
@@ -28,28 +28,26 @@ your GitHub username and token/password. It is recommended to use a
 instead of your password though either one works.
 
 ```
-$ ghstar.py --help
-usage: ghstar [-h] repo
+$ ghstar --help
+
+usage: ghstar [-h] [-i] [-n SEARCH_COUNT] repo
 
 Star GitHub repos from the command line.
 
 positional arguments:
-  repo        Name of repo to star
+  repo                  name of repo to star
 
 optional arguments:
-  -h, --help  show this help message and exit
+  -h, --help            show this help message and exit
+  -i, --interactive     search for a repo and star interactively
+  -n SEARCH_COUNT, --search-count SEARCH_COUNT
+                        number of search results to show when run
+                        interactively
 
 examples:
-  ghstar microsoft/vscode
+  ghstar gokulsoumya/ghstar
   ghstar jlevy/the-art-of-command-line
-
 ```
-
-## Planned Features
-
-- [ ] Unstar repos
-- [ ] Search and star interactively
-- [ ] View number of stars for a repo
 
 ## Contributing
 
